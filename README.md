@@ -1,52 +1,50 @@
-# Hotel Booking Client
+# hotel-booking-client
 
-React frontend for the Hotel Booking Management System built with Vite, PrimeReact, and React Router.
-
-## Prerequisites
-
-- Node.js v18+
-- npm v9+
-- Backend API running on port 5000
+React frontend for the Hotel Booking Management System. Vite + TypeScript + PrimeReact + Tailwind CSS.
 
 ## Setup
 
 ```bash
+git clone https://github.com/arpitha900/hotel-booking-client.git
 cd hotel-booking-client
 npm install
-npm run dev     # starts at http://localhost:5173
 ```
+
+Create a `.env` file in the project root:
+
+```
+VITE_API_BASE_URL=http://localhost:5000/api
+```
+
+```bash
+npm run dev    # http://localhost:3000
+```
+
+Make sure the backend is running on port 5000 before starting the frontend. Vite proxies all `/api` requests to the backend so there are no CORS issues.
 
 ## Modules
 
-| Route       | Description                                    |
-|-------------|------------------------------------------------|
-| `/users`    | Browse and search all registered users         |
-| `/hotels`   | Browse hotels with state/city/rating filters   |
-| `/bookings` | View bookings, filter, and export to Excel     |
+| Route | Description |
+|-------|-------------|
+| `/users` | Search users by name, email, phone. Sortable table with pagination |
+| `/hotels` | Filter by state, city, rating, status. Sortable table with pagination |
+| `/bookings` | Filter by user, hotel, status, date range. View details, cancel bookings, export to Excel |
 
-## Architecture
+## Reusable components
+
+- **ReusableTable** — generic table used across all three modules. Pass a `columns` config array and data, it handles sorting, pagination, loading skeletons, and empty state.
+- **ReusableFilter** — filter panel driven by a JSON config array. Adding a new filter field means adding one object to the config — no component changes needed.
+
+## Project structure
 
 ```
 src/
 ├── components/
-│   ├── ReusableTable.jsx    Config-driven data table with sorting & pagination
-│   ├── ReusableFilter.jsx   JSON-config driven filter panel
-│   └── Layout.jsx           Sidebar navigation wrapper
-├── pages/
-│   ├── Users.jsx
-│   ├── Hotels.jsx
-│   └── Bookings.jsx
-├── services/
-│   └── api.js               All Axios API calls
-├── hooks/
-│   └── useTableData.js      Reusable fetch + pagination state hook
-└── constants/
-    └── filterConfigs.js     JSON filter configs for all three modules
+│   ├── layout/       Sidebar, Layout with admin dropdown
+│   └── shared/       ReusableTable, ReusableFilter, StatusBadge, StatCard, Avatar
+├── pages/            Users, Hotels, Bookings
+├── hooks/            useTableData (generic), useUsers, useHotels, useBookings
+├── services/         api.ts — all Axios calls
+├── constants/        filterConfigs.ts, status.ts
+└── types/            TypeScript interfaces
 ```
-
-## Key Design Decisions
-
-- **ReusableTable**: Single component used by all three modules via `columns` prop array
-- **ReusableFilter**: Renders filter fields from a JSON config — add a new filter by adding one object to the config array
-- **useTableData hook**: Encapsulates loading/error/pagination state — zero duplication across pages
-- **Axios proxy**: Vite proxies `/api` requests to the backend so no CORS issues in development
