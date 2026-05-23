@@ -1,0 +1,143 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── Base ───────────────────────────────────────────────── */
+* { box-sizing: border-box; }
+body { font-family: 'Inter', system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+
+/* ── Scrollbar ──────────────────────────────────────────── */
+::-webkit-scrollbar { width: 5px; height: 5px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+
+/* ── PrimeReact — kill all focus rings/shadows ──────────── */
+.p-dropdown,
+.p-inputtext,
+.p-calendar .p-inputtext,
+.p-multiselect { font-family: 'Inter', system-ui, sans-serif !important; }
+
+.p-inputtext:enabled:focus,
+.p-inputtext:focus,
+.p-dropdown:not(.p-disabled).p-focus,
+.p-dropdown:focus-within,
+.p-dropdown.p-focus { box-shadow: none !important; outline: none !important; }
+
+/* ── PrimeReact Dropdown — Tailwind-matched styling ────── */
+.filter-dropdown .p-dropdown {
+  position: relative;
+  border: 1px solid #e2e8f0;
+  border-radius: 0.75rem;
+  background: #fff;
+  transition: border-color 0.15s, box-shadow 0.15s;
+  height: 44px;
+  display: flex;
+  align-items: center;
+}
+.filter-dropdown .p-dropdown:hover { border-color: #cbd5e1; }
+.filter-dropdown .p-dropdown.p-focus,
+.filter-dropdown .p-dropdown:focus-within {
+  border-color: #6366f1 !important;
+  box-shadow: 0 0 0 3px rgb(99 102 241 / 0.1) !important;
+  outline: none !important;
+}
+.filter-dropdown .p-dropdown .p-dropdown-label {
+  font-size: 0.875rem;
+  color: #374151;
+  padding: 0 0.75rem;
+  line-height: 42px;
+  border: none;
+  background: transparent;
+}
+.filter-dropdown .p-dropdown .p-dropdown-label.p-placeholder { color: #9ca3af; }
+.filter-dropdown .p-dropdown .p-dropdown-trigger { width: 2rem; color: #9ca3af; border: none; background: transparent; }
+.filter-dropdown .p-dropdown .p-dropdown-trigger .p-icon { width: 0.75rem; height: 0.75rem; }
+.filter-dropdown .p-dropdown .p-dropdown-clear-icon {
+  position: absolute !important;
+  right: 2.25rem !important;
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+  margin: 0 !important;
+  width: 0.75rem !important;
+  height: 0.75rem !important;
+  color: #9ca3af;
+  cursor: pointer;
+  display: block !important;
+  flex-shrink: 0;
+}
+.filter-dropdown .p-dropdown .p-dropdown-clear-icon:hover { color: #ef4444; }
+.filter-dropdown .p-dropdown.p-dropdown-clearable .p-dropdown-label { padding-right: 2rem; }
+
+.p-dropdown-panel { border: 1px solid #e2e8f0 !important; border-radius: 0.875rem !important; box-shadow: 0 12px 30px rgb(0 0 0 / 0.08), 0 4px 8px rgb(0 0 0 / 0.04) !important; overflow: hidden !important; }
+.p-dropdown-panel .p-dropdown-items { padding: 4px !important; }
+.p-dropdown-panel .p-dropdown-item { font-size: 0.875rem !important; padding: 0.5rem 0.75rem !important; border-radius: 6px !important; color: #374151 !important; }
+.p-dropdown-panel .p-dropdown-item.p-highlight { background: #eef2ff !important; color: #4f46e5 !important; }
+.p-dropdown-panel .p-dropdown-item:not(.p-highlight):hover { background: #f8fafc !important; }
+
+/* ── PrimeReact Calendar ────────────────────────────────── */
+.filter-calendar { width: 100%; }
+.filter-calendar .p-calendar { width: 100% !important; display: flex !important; }
+.filter-calendar .p-calendar .p-inputtext {
+  flex: 1;
+  font-size: 0.875rem !important;
+  height: 44px;
+  padding: 0 0.75rem !important;
+  border: 1px solid #e2e8f0 !important;
+  border-right: none !important;
+  border-radius: 0.75rem 0 0 0.75rem !important;
+  color: #374151 !important;
+  background: #fff !important;
+  transition: border-color 0.15s !important;
+  box-shadow: none !important;
+  outline: none !important;
+}
+.filter-calendar .p-calendar:hover .p-inputtext,
+.filter-calendar .p-calendar .p-inputtext:hover { border-color: #cbd5e1 !important; }
+.filter-calendar .p-calendar:focus-within .p-inputtext { border-color: #6366f1 !important; }
+.filter-calendar .p-calendar .p-datepicker-trigger {
+  height: 44px;
+  width: 44px;
+  border: 1px solid #e2e8f0 !important;
+  border-left: none !important;
+  border-radius: 0 0.75rem 0.75rem 0 !important;
+  background: #f8fafc !important;
+  color: #6b7280 !important;
+  box-shadow: none !important;
+  outline: none !important;
+  transition: border-color 0.15s, background 0.15s !important;
+}
+.filter-calendar .p-calendar .p-datepicker-trigger.p-button:not(.p-button-outlined):not(.p-button-text):not(.p-button-link):not(.p-datepicker-trigger) {
+  background: #f8fafc !important;
+}
+.filter-calendar .p-calendar:hover .p-datepicker-trigger { border-color: #cbd5e1 !important; }
+.filter-calendar .p-calendar:focus-within .p-datepicker-trigger { border-color: #6366f1 !important; }
+.filter-calendar .p-calendar .p-datepicker-trigger .p-icon,
+.filter-calendar .p-calendar .p-datepicker-trigger .p-button-icon { font-size: 0.8rem !important; width: 0.8rem; height: 0.8rem; }
+
+/* ── PrimeReact Dialog ──────────────────────────────────── */
+.p-dialog { border-radius: 1rem !important; box-shadow: 0 25px 60px rgb(0 0 0 / 0.12), 0 8px 20px rgb(0 0 0 / 0.06) !important; border: 1px solid #e2e8f0 !important; }
+.p-dialog .p-dialog-header { border-radius: 1rem 1rem 0 0 !important; padding: 1.25rem 1.5rem !important; border-bottom: 1px solid #f1f5f9 !important; }
+.p-dialog .p-dialog-content { padding: 1.5rem !important; }
+.p-dialog-mask { backdrop-filter: blur(2px); }
+
+/* ── PrimeReact Button ──────────────────────────────────── */
+.p-button:not(.p-button-outlined):not(.p-button-text):not(.p-button-link):not(.p-datepicker-trigger) {
+  background: #4f46e5 !important; border-color: #4f46e5 !important;
+}
+.p-button:not(.p-button-outlined):not(.p-button-text):not(.p-button-link):not(.p-datepicker-trigger):hover {
+  background: #4338ca !important; border-color: #4338ca !important;
+}
+.p-button.p-button-success { background: #10b981 !important; border-color: #10b981 !important; }
+.p-button.p-button-success:hover { background: #059669 !important; border-color: #059669 !important; }
+
+/* ── PrimeReact Toast ────────────────────────────────────── */
+.p-toast { font-family: 'Inter', system-ui, sans-serif !important; }
+
+/* ── Paginator ──────────────────────────────────────────── */
+.p-paginator { background: transparent !important; border: none !important; padding: 0 !important; }
+.p-paginator .p-paginator-pages .p-paginator-page.p-highlight {
+  background: #4f46e5 !important; border-color: #4f46e5 !important; color: #fff !important; border-radius: 0.5rem !important;
+}
+.p-paginator .p-paginator-element { border-radius: 0.5rem !important; }
