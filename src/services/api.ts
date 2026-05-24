@@ -41,6 +41,17 @@ export const bookingApi = {
   getBookedUsers: () =>
     get<ApiResponse<User[]>>('/bookings/getBookedUsers'),
 
+  create: (body: {
+    userId: string;
+    hotelId: string;
+    checkinDate: string;
+    guestCount: number;
+    requirements?: string;
+  }) => http.post<ApiResponse<Booking>>('/bookings/createBooking', body) as unknown as Promise<ApiResponse<Booking>>,
+
+  cancel: (bookingId: string) =>
+    http.post<ApiResponse<Booking>>(`/bookings/${bookingId}/cancel`) as unknown as Promise<ApiResponse<Booking>>,
+
   download: (params: Record<string, unknown>) =>
     axios.get<Blob>(
       `${import.meta.env.VITE_API_BASE_URL ?? '/api'}/bookings/getBookings`,
