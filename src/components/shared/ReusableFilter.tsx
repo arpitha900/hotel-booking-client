@@ -63,10 +63,13 @@ export default function ReusableFilter({
 
     if (item.type === 'dropdown') {
       const rawOpts = item.options ?? (dynamicOptions[item.optionsKey ?? ''] ?? []);
-      const opts = rawOpts.map((o) => ({
-        label: String(o[item.optionLabel ?? 'label'] ?? ''),
-        value: o[item.optionValue ?? 'value'],
-      }));
+      const opts = rawOpts.map((o) => {
+        const record = o as Record<string, unknown>;
+        return {
+          label: String(record[item.optionLabel ?? 'label'] ?? ''),
+          value: record[item.optionValue ?? 'value'],
+        };
+      });
 
       return (
         <div className="filter-dropdown">
